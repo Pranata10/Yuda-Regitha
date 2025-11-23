@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuda & Regitha</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+<body>
+
+    <audio id="background-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    
+    <button id="music-toggle" class="music-toggle" style="display: none;">
+        <i class="fas fa-volume-up"></i>
+    </button>
+
+    <div class="cover-page" id="cover">
+        <div class="cover-content">
+            
+            <img src="NGANTENFIX.png" alt="Logo Undangan" class="cover-logo"> 
+            
+            <p class="who-watching-single">Who's watching?</p>
+            <div class="guest-profile single-profile active" data-guest-name="[Nama Tamu]">
+                <img src="face.jpg" alt="Ikon Profil" class="profile-icon">
+                <p class="guest-name">Anda</p>
+            </div>
+
+            <button id="open-btn" class="outline-btn">OPEN INVITATION</button>
+        </div>
+    </div>
+
+    <div class="main-invitation" id="invitation">
+
+        <section class="netflix-trailer-hero">
+            <div class="hero-content-overlay">
+                
+                <p class="small-logo-netflix">NGANTENFIX</p>
+                
+                <h1>Yuda Kumala & Regitha Cahyani</h1>
+                <h1>Catur Asmara</h1>
+
+                <div class="date-status-bar">
+                    <span class="status-coming-soon">Coming Soon</span>
+                    <span class="date-time">9 Januari 2026</span>
+                </div>
+                
+                <div class="genre-tags">
+                    <button>Cinta</button>
+                    <button>Romansa</button>
+                    <button>Inspiratif</button>
+                    <button>Komitmen</button>
+                </div>
+                
+               <div class="trailer-call-to-action">
+                    <p class="sloka-source">
+                        Anyonyasyawyabhicaro,
+                        Bhawedamaranantikah.
+                        Esa dharmah samasena,
+                        Jneyah stripumsayoh parah.
+                    </p>
+                    <p>
+                        Hendaknya hubungan suami-isteri dilandasi oleh kesetiaan 
+                        dan berlangsung hingga selamanya. Singkatnya kesetiaanlah 
+                        yang menjadi hukum yang tertinggi
+                         dalam membina keharmonisan sebuah keluarga.
+                    </p>
+                    <p class="sloka-source">
+                        (Weda Smrthi : IX.101)
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="short-opening-section">
+            <h2 class="opening-mantra animated">Om Swastyastu,</h2>
+            <p class="opening-text animated">
+                Atas asung kertha wara nugraha Ida Sang Hyang Widhi Wasa,
+                kami memanjatkan puji syukur karena telah dipertemukan dalam
+                kasih yang suci untuk melanjutkan ke jenjang Pawiwahan.
+            </p>
+            <div class="line-separator-red animated"></div>
+        </section>
+        
+        <section class="netflix-cast-section">
+            <h2 class="section-title-netflix animated">🎬 Pemeran Utama</h2>
+        
+            <div class="mempelai-profile profile-pria">
+                <div class="profile-image-container animated">
+                    <img src="Parusa.jpg" alt="Profil Mempelai Pria">
+                    <div class="character-label">Parusa</div>
+                </div>
+                <div class="profile-details animated">
+                    <p class="role">Diperankan Oleh</p>
+                    <h3>Kadek Yuda Kumala T.D</h3>
+                    <p class="quote">"Sebuah janji yang akan kubawa hingga akhir waktu."</p>
+                    
+                    <div class="detail-list">
+                        <div>
+                            <span>Anak kedua dari Bapak I Ketut Sutha Wiadnyana (Alm) & Ibu Ni Nyoman Subudi</span>
+                        </div>
+                        <div>
+                            <p><a href="https://www.instagram.com/yudatd/" target="_blank" class="ig-link">@yudatd</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-separator animated"></div>
+
+            <div class="mempelai-profile profile-wanita">
+                <div class="profile-details animated">
+                    <p class="role">Diperankan Oleh</p>
+                    <h3>Anak Agung Istri Regitha Cahayani</h3>
+                    <p class="quote">"Menemukan rumah, bukan hanya di tempat, tapi di hatimu."</p>
+                    
+                    <div class="detail-list">
+                        <div>
+                            <span>Anak ketiga dari Bapak Anak Agung Gede Rai Rendra (Alm) & Ibu Ni Made Indriani</span>
+                        </div>
+                        <div> 
+                            <p><a href="https://www.instagram.com/regithacahyani/" target="_blank" class="ig-link">@regithacahyani</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-image-container animated">
+                    <img src="Pradana.jpg" alt="Profil Mempelai Wanita">
+                    <div class="character-label">Pradana</div>
+                </div>
+            </div>
+            
+            <p class="closing-narasi animated">Saksikan kisah mereka berlanjut di babak kehidupan yang baru.</p>
+
+        </section>
+
+        <section class="prewedding-section">
+            <h2 class="section-title-netflix animated">📸 Behind The Scene</h2>
+            
+            <p style="color:#ffffff99; padding: 0 20px; max-width: 600px; margin: 0 auto 20px;">
+                "Setiap foto adalah babak kecil dari kisah yang akan kami rajut selamanya."
+            </p>
+
+            <div class="photo-grid">
+                <img 
+                    src="prewed_kolase_1.jpg" 
+                    alt="Foto Pre-Wedding Kolase 1" 
+                    class="animated gallery-item"
+                    data-title="Episode 1: Awal Kisah di Bali"
+                    data-caption="Di balik senyum ini, ada kisah tentang bagaimana kami bertemu di sebuah festival musik. Momen ini mengabadikan janji pertama kami untuk selalu bersama."
+                >
+                <img 
+                    src="prewed_kolase_2.jpg" 
+                    alt="Foto Pre-Wedding Kolase 2" 
+                    class="animated gallery-item"
+                    data-title="Episode 2: Liku Perjalanan dan Kesabaran"
+                    data-caption="Sesi ini diambil saat matahari terbenam, melambangkan akhir dari masa penantian panjang dan awal yang baru. LDR adalah cerita lama kami."
+                >
+                <img 
+                    src="prewed_kolase_3.jpg" 
+                    alt="Foto Pre-Wedding Kolase 3" 
+                    class="animated gallery-item"
+                    data-title="Episode 3: Janji Abadi di Pelabuhan"
+                    data-caption="Pelabuhan ini adalah saksi bisu, tempat kami pertama kali berdiskusi serius tentang pernikahan. Di sini, janji kami semakin kuat, sekuat ombak."
+                >
+                <img 
+                    src="prewed_kolase_4.jpg" 
+                    alt="Foto Pre-Wedding Kolase 4" 
+                    class="animated gallery-item"
+                    data-title="Episode 4: Di Balik Tawa"
+                    data-caption="Momen candid saat kami mencoba menahan tawa karena ulah fotografer. Ini adalah kami: selalu konyol dan bahagia."
+                >
+                <img 
+                    src="prewed_kolase_5.jpg" 
+                    alt="Foto Pre-Wedding Kolase 5" 
+                    class="animated gallery-item"
+                    data-title="Episode 5: Menuju Hari H"
+                    data-caption="Tatapan penuh harap menanti hari besar. Semua persiapan terbayarkan melihat hasil foto yang menceritakan perjalanan kami."
+                >
+                <img 
+                    src="prewed_kolase_6.jpg" 
+                    alt="Foto Pre-Wedding Kolase 6" 
+                    class="animated gallery-item"
+                    data-title="Episode 6: Cinta Sejati"
+                    data-caption="Hanya berdua, dalam kesederhanaan. Ini adalah inti dari hubungan kami: hanya kami dan cinta."
+                >
+            </div>
+
+            <h2 class="section-title-netflix animated" style="margin-top: 40px;">🎬 Trailer</h2>
+            
+            <div class="video-container animated">
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/watch?v=fFP9n7s-GAI" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            
+        </section>
+
+        <section class="event-details-section">
+            <h2 class="section-title-netflix animated">🕰️ The Premiere</h2>
+            
+            <div class="countdown-container animated">
+                <p class="countdown-label">Tayang Dalam:</p>
+                <div id="countdown-timer" class="countdown-timer">
+                    <div class="time-block"><span id="days">00</span> Hari</div>
+                    <div class="time-block"><span id="hours">00</span> Jam</div>
+                    <div class="time-block"><span id="minutes">00</span> Menit</div>
+                    <div class="time-block"><span id="seconds">00</span> Detik</div>
+                </div>
+            </div>
+
+            <div class="event-info-grid">
+                
+                <div class="event-block animated">
+                    <h3 class="event-title">Resepsi & Ramah Tamah</h3>
+                    <h2 class="event-date">Jumat, 9 Januari 2026</h2>
+                    <p class="event-time">Pukul: 13.00 Wita - 21.00 Wita</p>
+                    <p class="event-address">Jalan Mawar No 8 Banjar Gunaksa, Kelurahan Cempaga, Bangli, Bali</p>
+                    
+                    <div class="action-buttons">
+                        <a href="https://maps.app.goo.gl/uKc3BPpQiG7ZrS3Z9" target="_blank" class="map-link"><i class="fas fa-map-marker-alt"></i> Lokasi</a>
+                        <a href="#" id="calendar-resepsi" class="calendar-link"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="digital-gift-section">
+            <h2 class="section-title-netflix animated">🎁 Kado Pernikahan (Hadiah Digital)</h2>
+            <p style="color:#ffffff99; margin-bottom: 25px;">
+                Doa restu dari Bapak/Ibu/Saudara/i adalah hadiah tak ternilai, namun jika ingin memberikan kado, dapat melalui transfer bank:
+            </p>
+            
+            <div class="gift-grid">
+                
+                <div class="bank-block animated">
+                    <div class="bank-header">
+                        <img src="logo_bpd.png" alt="Logo Bank BPD Bali" class="bank-logo">
+                        <h4>Bank BPD Bali</h4>
+                    </div>
+                    <div class="bank-info">
+                        <div class="bank-details">
+                            <p>A/N: Kadek Yuda Kumala T.D</p>
+                            <p>No. Rek: <strong id="rekening-bpd">0123 4567 8901</strong></p>
+                        </div>
+                        <button class="copy-btn" data-account="012345678901"><i class="fas fa-copy"></i> Salin</button>
+                    </div>
+                </div>
+                
+                </div>
+            
+            <p class="bank-note animated">Terima kasih atas segala bentuk kasih sayang dan restu yang telah diberikan.</p>
+        </section>
+
+
+        <footer class="closing-msg">
+            <div class="footer-logo">TERIMAKASIH</div>
+            
+            <div class="footer-slideshow-container">
+                <img src="footerslide_1.jpg" class="footer-slide-img active-slide" alt="Mempelai Slide 1">
+                <img src="footerslide_2.jpg" class="footer-slide-img" alt="Mempelai Slide 2">
+                <img src="footerslide_3.jpg" class="footer-slide-img" alt="Mempelai Slide 3">
+                </div>
+            
+            <p>Hormat Kami yang Berbahagia Dari Keluarga Besar,</p>
+            <h1 class="signature">Yuda & Regitha </h1>
+            <p class="copyright-info">© 2026 Yuda & Regitha Pawiwahan. Designed with <i class="fas fa-mug-hot"></i> by terserah.card.</p>
+        </footer>
+    </div>
+    
+    <div id="photoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">×</span>
+            <img id="modalImage" class="modal-image" alt="Foto Diperbesar">
+            <h3 id="modalTitle" class="modal-title"></h3>
+            <p id="modalCaption" class="modal-caption"></p>
+        </div>
+    </div>
+    <script>
+
+// =======================================
+// FUNGSI UTAMA (DEFINISI)
+// =======================================
+
+// FUNGSI CUSTOM NAMA TAMU DARI URL
+function setGuestNameFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let guestName = urlParams.get('to'); 
+    
+    if (!guestName) {
+        guestName = 'Anda'; 
+    } else {
+        guestName = guestName.replace(/\+/g, ' '); 
+        guestName = guestName.toLowerCase().split(' ').map((word) => {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        }).join(' ');
+    }
+    
+    const nameElements = document.querySelectorAll('.guest-name');
+    nameElements.forEach(el => {
+        el.textContent = guestName;
+    });
+}
+
+// FUNGSI MODAL/LIGHTBOX GALERI
+function setupGalleryModal() {
+    // Kini elemen 'photoModal' sudah ADA di HTML, sehingga kode ini bisa berjalan
+    const modal = document.getElementById('photoModal');
+    if (!modal) return; 
+
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.close-btn');
+
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            modal.style.display = "block";
+            
+            // Mengambil data dari atribut 'data-' pada tag <img>
+            modalImg.src = this.src;
+            modalTitle.textContent = this.getAttribute('data-title');
+            modalCaption.textContent = this.getAttribute('data-caption');
+            
+            document.body.style.overflow = 'hidden'; 
+        });
+    });
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+        document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
+    }
+
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
+        }
+    }
+    
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
+        }
+    });
+}
+
+// FUNGSI SLIDESHOW FOTO DI FOOTER
+function startFooterSlideshow() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.footer-slide-img');
+    
+    if (slides.length === 0) return;
+
+    function showSlides() {
+        slides.forEach(slide => {
+            slide.classList.remove('active-slide');
+        });
+
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].classList.add('active-slide');
+
+        setTimeout(showSlides, 3000); // Ganti slide setiap 3 detik
+    }
+
+    showSlides();
+}
+
+
+// FUNGSI KALENDER UTC CONVERTER
+function generateGoogleCalendarLink(title, location, date, startTime, endTime) {
+    const startDateTimeLocal = new Date(`${date} ${startTime}`);
+    const endDateTimeLocal = new Date(`${date} ${endTime}`);
+    
+    // Asumsi WITA adalah UTC+8 (8 * 60 menit)
+    const offsetMinutes = 8 * 60; 
+    
+    // Konversi waktu lokal (WITA) ke UTC
+    const startUTC = new Date(startDateTimeLocal.getTime() - (startDateTimeLocal.getTimezoneOffset() * 60000) + (offsetMinutes * 60000));
+    const endUTC = new Date(endDateTimeLocal.getTime() - (endDateTimeLocal.getTimezoneOffset() * 60000) + (offsetMinutes * 60000));
+    
+    const formatTime = (dateObj) => 
+        dateObj.toISOString().replace(/[-:.]/g, '').substring(0, 15) + 'Z';
+
+    const formattedStart = formatTime(startUTC);
+    const formattedEnd = formatTime(endUTC);
+
+    
+    const baseUrl = "https://www.google.com/calendar/render?action=TEMPLATE";
+    const details = encodeURIComponent(title + " | Undangan Pawiwahan Yuda & Regitha");
+    const loc = encodeURIComponent(location);
+    const text = encodeURIComponent(title);
+    
+    return `${baseUrl}&text=${text}&dates=${formattedStart}/${formattedEnd}&details=${details}&location=${loc}`;
+}
+
+// FUNGSI ANIMASI SCROLL 
+function initScrollAnimation() {
+    // 🔥 PERBAIKAN KRITIS: Hapus semua selector footer di sini agar footer muncul secara statis (seperti yang diatur di CSS)
+    const animateElements = document.querySelectorAll(
+        '.short-opening-section h2, .short-opening-section p, .short-opening-section .line-separator-red, ' +
+        '.netflix-cast-section .section-title-netflix, ' + 
+        '.mempelai-profile .profile-image-container, ' + 
+        '.mempelai-profile .profile-details, ' +       
+        '.timeline-separator, ' +
+        '.closing-narasi, ' +
+        
+        '.prewedding-section .section-title-netflix, ' + 
+        '.prewedding-section p:not(.sloka-source), ' + 
+        '.photo-grid img, ' +  // Selector galeri
+        '.video-container, ' + 
+        
+        '.event-details-section .section-title-netflix, ' +
+        '.countdown-container, ' + 
+        '.event-info-grid .event-block, ' +
+        
+        '.digital-gift-section .section-title-netflix, ' + 
+        '.digital-gift-section p, ' + 
+        '.bank-block, ' + 
+        '.bank-note' // Stop di sini. Semua elemen footer telah dihapus dari daftar.
+    );
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let delay = '0s'; 
+                
+                if (entry.target.closest('.mempelai-profile')) {
+                    if (entry.target.classList.contains('profile-image-container')) {
+                        delay = '0.1s';
+                    } else if (entry.target.classList.contains('profile-details')) {
+                        delay = '0.3s';
+                    }
+                } 
+                
+                else if (entry.target.closest('.photo-grid')) {
+                    const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+                    delay = `${index * 0.15 + 0.1}s`;
+                }
+                
+                else if (entry.target.classList.contains('event-block')) {
+                    delay = '0.1s'; 
+                }
+                
+                else if (entry.target.classList.contains('bank-block')) {
+                    const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+                    delay = `${index * 0.2 + 0.1}s`;
+                }
+                
+                entry.target.style.transitionDelay = delay;
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px' 
+    });
+
+    animateElements.forEach(el => {
+        // Hapus kelas animated di awal agar tidak langsung muncul
+        el.classList.remove('animated'); 
+        observer.observe(el);
+    });
+}
+
+
+// =======================================
+// INITIALIZATION (PANGGILAN UTAMA)
+// =======================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('open-btn');
+    const coverPage = document.getElementById('cover');
+    const mainInvitation = document.getElementById('invitation');
+    const music = document.getElementById('background-music');
+    const musicToggle = document.getElementById('music-toggle');
+    let isMuted = false;
+    
+    // Panggil fungsi-fungsi inisiasi
+    setGuestNameFromURL(); 
+    setupGalleryModal(); // Pastikan ini dipanggil agar foto bisa diklik
+    startFooterSlideshow(); 
+
+    
+    // 1. Cover dan Musik
+    openBtn.addEventListener('click', function() {
+       
+        try {
+            music.play().catch(error => { 
+                console.error("Autoplay diblokir:", error);
+                musicToggle.style.display = 'flex';
+            });
+        } catch (error) {
+            console.error("Gagal memanggil music.play()", error);
+        }
+
+        musicToggle.style.display = 'flex';
+        
+        coverPage.style.transform = 'translateY(-100vh)';
+        
+        // 🔥 TIDAK ADA document.body.style.overflow = 'auto' di sini. 
+        // Scrolling diatur oleh CSS di file style.css
+        
+        setTimeout(() => {
+            mainInvitation.style.opacity = '1';
+            mainInvitation.style.transform = 'translateY(0)';
+            
+            initScrollAnimation(); // Panggil animasi scroll setelah cover tertutup
+        }, 100); 
+    });
+
+    
+    // 2. Mute
+    musicToggle.addEventListener('click', function() {
+        if (isMuted) {
+            music.play();
+            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+        } else {
+            music.pause();
+            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+        }
+        isMuted = !isMuted;
+    });
+
+
+    
+    // 3. Countdown
+    const targetDate = new Date("Jan 9, 2026 13:00:00").getTime(); 
+    
+    const countdownFunction = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        const daysEl = document.getElementById("days");
+        if (!daysEl) {
+            clearInterval(countdownFunction);
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+       
+        daysEl.innerHTML = days < 10 ? "0" + days : days;
+        document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+        document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown-timer").innerHTML = "<p style='color: #e50914;'>ACARA TELAH USAI. SELAMAT MENIKAH!</p>";
+        }
+    }, 1000);
+    
+    
+   
+  
+    // 4. Kalender Link
+    const calendarLink = document.getElementById('calendar-resepsi');
+    if (calendarLink) {
+         const resepsiLink = generateGoogleCalendarLink(
+            "Resepsi & Ramah Tamah Kadek & Regitha",
+            "Gedung Serbaguna, Jalan Raya Mawar No. 10, Kota Denpasar",
+            "2026-01-9", 
+            "18:00:00", // Waktu Kalender disarankan menggunakan waktu resepsi saja (18:00-21:00)
+            "21:00:00"
+        );
+        calendarLink.setAttribute('href', resepsiLink);
+        calendarLink.setAttribute('target', '_blank');
+    }
+
+  
+    // 5. Copy Rekening
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            
+            const accountNumber = this.getAttribute('data-account');
+            
+            navigator.clipboard.writeText(accountNumber)
+                .then(() => {
+                    const originalText = this.innerHTML;
+                    
+                    this.innerHTML = '<i class="fas fa-check"></i> Disalin!';
+                    this.style.backgroundColor = '#4CAF50'; 
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        // Kembalikan ke warna CSS default:
+                        this.style.backgroundColor = ''; 
+                    }, 1500);
+                })
+                .catch(err => {
+                    console.error('Gagal menyalin: ', err);
+                    alert('Gagal menyalin, silakan salin manual: ' + accountNumber);
+                });
+        });
+    });
+});
+</script>
+</body>
+</html>
