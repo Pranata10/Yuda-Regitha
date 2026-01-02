@@ -899,3 +899,69 @@ body {
         top: 15px;
     }
 }
+
+/* Styling Section Video */
+.video-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    background: #1a1a1a;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    border: 1px solid #333;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-info-overlay {
+    padding: 15px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.video-info-overlay p {
+    margin: 0;
+    font-weight: 600;
+    color: #e50914; /* Merah Netflix */
+    font-size: 0.9rem;
+}
+
+.video-info-overlay span {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+/* Animasi tambahan */
+.video-wrapper.animated {
+    animation: fadeInUp 1s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
