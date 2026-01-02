@@ -197,17 +197,16 @@
 
             <h2 class="section-title-netflix animated" style="margin-top: 40px;">🎬 Trailer</h2>
             
-            <div class="video-container animated">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/watch?v=fFP9n7s-GAI" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
+           <div class="video-container">
+    <iframe 
+        id="trailer-video"
+        src="https://www.youtube.com/embed/f_FpqwPOETI?enablejsapi=1&mute=1&rel=0" 
+        title="Prewedding Yuda & Regitha" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+    </iframe>
+</div>
             
         </section>
 
@@ -319,7 +318,25 @@
 // =======================================
 // FUNGSI UTAMA (DEFINISI)
 // =======================================
+// Tambahkan ini di dalam event listener tombol 'open-btn'
+openBtn.addEventListener('click', function() {
+    
+    // ... kode musik yang sudah ada ...
+    try {
+        music.play();
+    } catch (error) { console.error(error); }
 
+    // --- KODE BARU UNTUK AUTOPLAY VIDEO ---
+    const videoIframe = document.getElementById('trailer-video');
+    if (videoIframe) {
+        // Mengirim perintah 'playVideo' ke YouTube API
+        videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    }
+    // --------------------------------------
+
+    coverPage.style.transform = 'translateY(-100vh)';
+    // ... sisa kode lainnya ...
+});
 // FUNGSI CUSTOM NAMA TAMU DARI URL
 function setGuestNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
