@@ -200,7 +200,7 @@
            <div class="video-container">
     <iframe 
         id="trailer-video"
-        src="https://www.youtube.com/embed/f_FpqwPOETI?enablejsapi=1&mute=1&rel=0" 
+        src="https://www.youtube.com/embed/f_FpqwPOETI?enablejsapi=1&autoplay=1&mute=1&rel=0&playlist=f_FpqwPOETI&loop=1" 
         title="Prewedding Yuda & Regitha" 
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -318,24 +318,30 @@
 // =======================================
 // FUNGSI UTAMA (DEFINISI)
 // =======================================
-// Tambahkan ini di dalam event listener tombol 'open-btn'
 openBtn.addEventListener('click', function() {
-    
-    // ... kode musik yang sudah ada ...
+    // Memutar musik latar utama
     try {
-        music.play();
-    } catch (error) { console.error(error); }
+        music.play().catch(error => console.error("Musik diblokir:", error));
+    } catch (error) {
+        console.error("Gagal memanggil musik", error);
+    }
 
-    // --- KODE BARU UNTUK AUTOPLAY VIDEO ---
+    // --- KODE AUTOPLAY & MUTE VIDEO ---
     const videoIframe = document.getElementById('trailer-video');
     if (videoIframe) {
-        // Mengirim perintah 'playVideo' ke YouTube API
+        // Mengirim perintah ke YouTube API untuk memutar video (karena sudah di-mute di HTML)
         videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
-    // --------------------------------------
+    // ----------------------------------
 
+    musicToggle.style.display = 'flex';
     coverPage.style.transform = 'translateY(-100vh)';
-    // ... sisa kode lainnya ...
+    
+    setTimeout(() => {
+        mainInvitation.style.opacity = '1';
+        mainInvitation.style.transform = 'translateY(0)';
+        initScrollAnimation();
+    }, 100);
 });
 // FUNGSI CUSTOM NAMA TAMU DARI URL
 function setGuestNameFromURL() {
