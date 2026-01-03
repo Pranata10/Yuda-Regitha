@@ -326,24 +326,46 @@
 // FUNGSI UTAMA (DEFINISI)
 // =======================================
 // Di dalam event listener tombol 'open-btn'
-openBtn.addEventListener('click', function() {
-    
-    // 1. Putar musik latar utama
-    try {
-        music.play();
-    } catch (e) { console.error("Audio blocked"); }
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Definisikan variabel elemen terlebih dahulu
+    const openBtn = document.getElementById('open-btn');
+    const coverPage = document.getElementById('cover');
+    const mainInvitation = document.getElementById('invitation');
+    const music = document.getElementById('background-music');
+    const musicToggle = document.getElementById('music-toggle');
+    let isMuted = false;
 
-    // 2. KODE BARU: Paksa video untuk play (Muted)
-    const trailerVideo = document.getElementById('video-trailer');
-    if (trailerVideo) {
-        trailerVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+    // 2. Pasang Event Listener untuk tombol OPEN di SINI
+    if (openBtn) {
+        openBtn.addEventListener('click', function() {
+            // Putar musik
+            try {
+                music.play().catch(error => { 
+                    console.error("Autoplay diblokir:", error);
+                });
+            } catch (error) {
+                console.error("Gagal memanggil music.play()", error);
+            }
+
+            // Putar Video Trailer Otomatis (Muted)
+            const trailerVideo = document.getElementById('video-trailer');
+            if (trailerVideo) {
+                trailerVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            }
+
+            musicToggle.style.display = 'flex';
+            
+            // Animasi geser cover ke atas
+            coverPage.style.transform = 'translateY(-100vh)';
+            
+            setTimeout(() => {
+                mainInvitation.style.opacity = '1';
+                mainInvitation.style.transform = 'translateY(0)';
+                
+                initScrollAnimation(); // Panggil animasi scroll
+            }, 100); 
+        });
     }
-
-    // 3. Animasi Cover
-    coverPage.style.transform = 'translateY(-100vh)';
-    
-    // ... sisa kode lainnya ...
-});
 
         
 // FUNGSI CUSTOM NAMA TAMU DARI URL
