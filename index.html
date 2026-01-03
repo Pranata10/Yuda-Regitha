@@ -239,23 +239,30 @@
             </div>
         </section>
 
-        <h2 class="section-title-netflix animated" style="margin-top: 40px;">🎬 Trailer:</h2>
-
-<div class="video-wrapper animated">
-    <div class="video-container">
-        <iframe 
-            src="https://www.youtube.com/embed/f_FpqwPOETI?rel=0" 
-            title="Prewedding Yuda & Regitha" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
+        <section class="netflix-trailer-section">
+    <h2 class="section-title-netflix animated">🎬 The Trailer</h2>
+    
+    <div class="video-wrapper animated">
+        <div class="video-container">
+            <iframe 
+                id="video-trailer"
+                src="https://www.youtube.com/embed/f_FpqwPOETI?enablejsapi=1&autoplay=1&mute=1&rel=0&loop=1&playlist=f_FpqwPOETI" 
+                title="Prewedding Yuda & Regitha" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="video-info-overlay">
+            <p><i class="fas fa-play"></i> NOW PLAYING</p>
+            <span>Yuda & Regitha: The Movie</span>
+        </div>
     </div>
-    <div class="video-info-overlay">
-        <p><i class="fas fa-play"></i> Sekarang Diputar</p>
-        <span>Yuda & Regitha: Musim 1</span>
+    
+    <div class="video-narration animated">
+        <p>"Cinta tumbuh dari kehilangan, diam tapi menguatkan. Sunyi kehilangan kuasanya, hampa menjelma makna."</p>
     </div>
-</div>
+</section>
 
         <section class="digital-gift-section">
             <h2 class="section-title-netflix animated">🎁 Kado Pernikahan (Hadiah Digital)</h2>
@@ -301,7 +308,7 @@
             
             <p>Hormat Kami yang Berbahagia Dari Keluarga Besar,</p>
             <h1 class="signature">Yuda & Regitha </h1>
-            <p class="copyright-info">© 2026 Yuda & Regitha Pawiwahan. Designed with <i class="fas fa-mug-hot"></i> by terserah.card.</p>
+            <p class="copyright-info">© 2026 Yuda & Regitha Pawiwahan. Designed with <i class="fas fa-mug-hot"></i> by voluntaz.card.</p>
         </footer>
     </div>
     
@@ -318,31 +325,27 @@
 // =======================================
 // FUNGSI UTAMA (DEFINISI)
 // =======================================
+// Di dalam event listener tombol 'open-btn'
 openBtn.addEventListener('click', function() {
-    // Memutar musik latar utama
+    
+    // 1. Putar musik latar utama
     try {
-        music.play().catch(error => console.error("Musik diblokir:", error));
-    } catch (error) {
-        console.error("Gagal memanggil musik", error);
+        music.play();
+    } catch (e) { console.error("Audio blocked"); }
+
+    // 2. KODE BARU: Paksa video untuk play (Muted)
+    const trailerVideo = document.getElementById('video-trailer');
+    if (trailerVideo) {
+        trailerVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
 
-    // --- KODE AUTOPLAY & MUTE VIDEO ---
-    const videoIframe = document.getElementById('trailer-video');
-    if (videoIframe) {
-        // Mengirim perintah ke YouTube API untuk memutar video (karena sudah di-mute di HTML)
-        videoIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-    }
-    // ----------------------------------
-
-    musicToggle.style.display = 'flex';
+    // 3. Animasi Cover
     coverPage.style.transform = 'translateY(-100vh)';
     
-    setTimeout(() => {
-        mainInvitation.style.opacity = '1';
-        mainInvitation.style.transform = 'translateY(0)';
-        initScrollAnimation();
-    }, 100);
+    // ... sisa kode lainnya ...
 });
+
+        
 // FUNGSI CUSTOM NAMA TAMU DARI URL
 function setGuestNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
