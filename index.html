@@ -320,14 +320,15 @@
             <p id="modalCaption" class="modal-caption"></p>
         </div>
     </div>
+
+    
     <script>
 
 // =======================================
-// FUNGSI UTAMA (DEFINISI)
+// 1. INITIALIZATION & EVENT LISTENERS
 // =======================================
-// Di dalam event listener tombol 'open-btn'
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Definisikan variabel elemen terlebih dahulu
+    // Inisialisasi Elemen
     const openBtn = document.getElementById('open-btn');
     const coverPage = document.getElementById('cover');
     const mainInvitation = document.getElementById('invitation');
@@ -335,38 +336,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const musicToggle = document.getElementById('music-toggle');
     let isMuted = false;
 
-    // 2. Pasang Event Listener untuk tombol OPEN di SINI
+    // Fungsi Buka Undangan
     if (openBtn) {
         openBtn.addEventListener('click', function() {
-            // Putar musik
+            // Putar Musik Latar
             try {
-                music.play().catch(error => { 
-                    console.error("Autoplay diblokir:", error);
-                });
-            } catch (error) {
-                console.error("Gagal memanggil music.play()", error);
-            }
+                music.play().catch(error => console.error("Autoplay musik diblokir browser"));
+            } catch (e) { console.error(e); }
 
             // Putar Video Trailer Otomatis (Muted)
             const trailerVideo = document.getElementById('video-trailer');
-            if (trailerVideo) {
-                trailerVideo.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            }
+            const trailerVideoAlt = document.getElementById('trailer-video');
+            
+            // Cek kedua kemungkinan ID video yang ada di HTML Anda
+            [trailerVideo, trailerVideoAlt].forEach(vid => {
+                if (vid) {
+                    vid.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            });
 
+            // Tampilkan tombol musik
             musicToggle.style.display = 'flex';
             
-            // Animasi geser cover ke atas
+            // Animasi Transisi Cover
             coverPage.style.transform = 'translateY(-100vh)';
             
             setTimeout(() => {
                 mainInvitation.style.opacity = '1';
                 mainInvitation.style.transform = 'translateY(0)';
-                
-                initScrollAnimation(); // Panggil animasi scroll
+                initScrollAnimation(); // Jalankan animasi scroll
             }, 100); 
         });
     }
 
+    // Fungsi Mute/Unmute Musik
+    if (musicToggle) {
+        musicToggle.addEventListener('click', function() {
+            if (isMuted) {
+                music.play();
+                this.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                music.pause();
+                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+            isMuted = !isMuted;
+        });
+    }
+
+    // Jalankan Fungsi Pendukung
+    setGuestNameFromURL(); 
+    setupGalleryModal(); 
+    startFooterSlideshow(); 
+    startCountdown();
+    setupCalendar();
+    setupCopyAccount();
+});
         
 // FUNGSI CUSTOM NAMA TAMU DARI URL
 function setGuestNameFromURL() {
