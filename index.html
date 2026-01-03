@@ -310,75 +310,10 @@
         </div>
     </div>
     <script>
-
 // =======================================
-// 1. INITIALIZATION & EVENT LISTENERS
+// 1. UTILITY & HELPER FUNCTIONS
 // =======================================
-document.addEventListener('DOMContentLoaded', function() {
-    // Inisialisasi Elemen
-    const openBtn = document.getElementById('open-btn');
-    const coverPage = document.getElementById('cover');
-    const mainInvitation = document.getElementById('invitation');
-    const music = document.getElementById('background-music');
-    const musicToggle = document.getElementById('music-toggle');
-    let isMuted = false;
 
-    // Fungsi Buka Undangan
-    if (openBtn) {
-        openBtn.addEventListener('click', function() {
-            // Putar Musik Latar
-            try {
-                music.play().catch(error => console.error("Autoplay musik diblokir browser"));
-            } catch (e) { console.error(e); }
-
-            // Putar Video Trailer Otomatis (Muted)
-            const trailerVideo = document.getElementById('video-trailer');
-            const trailerVideoAlt = document.getElementById('trailer-video');
-            
-            // Cek kedua kemungkinan ID video yang ada di HTML Anda
-            [trailerVideo, trailerVideoAlt].forEach(vid => {
-                if (vid) {
-                    vid.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                }
-            });
-
-            // Tampilkan tombol musik
-            musicToggle.style.display = 'flex';
-            
-            // Animasi Transisi Cover
-            coverPage.style.transform = 'translateY(-100vh)';
-            
-            setTimeout(() => {
-                mainInvitation.style.opacity = '1';
-                mainInvitation.style.transform = 'translateY(0)';
-                initScrollAnimation(); // Jalankan animasi scroll
-            }, 100); 
-        });
-    }
-
-    // Fungsi Mute/Unmute Musik
-    if (musicToggle) {
-        musicToggle.addEventListener('click', function() {
-            if (isMuted) {
-                music.play();
-                this.innerHTML = '<i class="fas fa-volume-up"></i>';
-            } else {
-                music.pause();
-                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            }
-            isMuted = !isMuted;
-        });
-    }
-
-    // Jalankan Fungsi Pendukung
-    setGuestNameFromURL(); 
-    setupGalleryModal(); 
-    startFooterSlideshow(); 
-    startCountdown();
-    setupCalendar();
-    setupCopyAccount();
-});
-        
 // FUNGSI CUSTOM NAMA TAMU DARI URL
 function setGuestNameFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -399,87 +334,12 @@ function setGuestNameFromURL() {
     });
 }
 
-// FUNGSI MODAL/LIGHTBOX GALERI
-function setupGalleryModal() {
-    // Kini elemen 'photoModal' sudah ADA di HTML, sehingga kode ini bisa berjalan
-    const modal = document.getElementById('photoModal');
-    if (!modal) return; 
-
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalCaption = document.getElementById('modalCaption');
-    const closeBtn = document.querySelector('.close-btn');
-
-    const galleryItems = document.querySelectorAll('.gallery-item');
-
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            modal.style.display = "block";
-            
-            // Mengambil data dari atribut 'data-' pada tag <img>
-            modalImg.src = this.src;
-            modalTitle.textContent = this.getAttribute('data-title');
-            modalCaption.textContent = this.getAttribute('data-caption');
-            
-            document.body.style.overflow = 'hidden'; 
-        });
-    });
-
-    closeBtn.onclick = function() {
-        modal.style.display = "none";
-        document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
-    }
-
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            modal.style.display = "none";
-            document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
-        }
-    }
-    
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && modal.style.display === 'block') {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; // Diaktifkan lagi hanya saat modal ditutup
-        }
-    });
-}
-
-// FUNGSI SLIDESHOW FOTO DI FOOTER
-function startFooterSlideshow() {
-    let slideIndex = 0;
-    const slides = document.querySelectorAll('.footer-slide-img');
-    
-    if (slides.length === 0) return;
-
-    function showSlides() {
-        slides.forEach(slide => {
-            slide.classList.remove('active-slide');
-        });
-
-        slideIndex++;
-        if (slideIndex > slides.length) {
-            slideIndex = 1;
-        }
-
-        slides[slideIndex - 1].classList.add('active-slide');
-
-        setTimeout(showSlides, 3000); // Ganti slide setiap 3 detik
-    }
-
-    showSlides();
-}
-
-
 // FUNGSI KALENDER UTC CONVERTER
 function generateGoogleCalendarLink(title, location, date, startTime, endTime) {
     const startDateTimeLocal = new Date(`${date} ${startTime}`);
     const endDateTimeLocal = new Date(`${date} ${endTime}`);
+    const offsetMinutes = 8 * 60; // WITA (UTC+8)
     
-    // Asumsi WITA adalah UTC+8 (8 * 60 menit)
-    const offsetMinutes = 8 * 60; 
-    
-    // Konversi waktu lokal (WITA) ke UTC
     const startUTC = new Date(startDateTimeLocal.getTime() - (startDateTimeLocal.getTimezoneOffset() * 60000) + (offsetMinutes * 60000));
     const endUTC = new Date(endDateTimeLocal.getTime() - (endDateTimeLocal.getTimezoneOffset() * 60000) + (offsetMinutes * 60000));
     
@@ -489,165 +349,78 @@ function generateGoogleCalendarLink(title, location, date, startTime, endTime) {
     const formattedStart = formatTime(startUTC);
     const formattedEnd = formatTime(endUTC);
 
-    
     const baseUrl = "https://www.google.com/calendar/render?action=TEMPLATE";
-    const details = encodeURIComponent(title + " | Undangan Pawiwahan Yuda & Regitha");
-    const loc = encodeURIComponent(location);
-    const text = encodeURIComponent(title);
-    
-    return `${baseUrl}&text=${text}&dates=${formattedStart}/${formattedEnd}&details=${details}&location=${loc}`;
+    return `${baseUrl}&text=${encodeURIComponent(title)}&dates=${formattedStart}/${formattedEnd}&details=${encodeURIComponent(title + " | Undangan Pawiwahan Yuda & Regitha")}&location=${encodeURIComponent(location)}`;
 }
 
-// FUNGSI ANIMASI SCROLL 
-function initScrollAnimation() {
-    // 🔥 PERBAIKAN KRITIS: Hapus semua selector footer di sini agar footer muncul secara statis (seperti yang diatur di CSS)
-    const animateElements = document.querySelectorAll(
-        '.short-opening-section h2, .short-opening-section p, .short-opening-section .line-separator-red, ' +
-        '.netflix-cast-section .section-title-netflix, ' + 
-        '.mempelai-profile .profile-image-container, ' + 
-        '.mempelai-profile .profile-details, ' +       
-        '.timeline-separator, ' +
-        '.closing-narasi, ' +
-        
-        '.prewedding-section .section-title-netflix, ' + 
-        '.prewedding-section p:not(.sloka-source), ' + 
-        '.photo-grid img, ' +  // Selector galeri
-        '.video-container, ' + 
-        
-        '.event-details-section .section-title-netflix, ' +
-        '.countdown-container, ' + 
-        '.event-info-grid .event-block, ' +
-        
-        '.digital-gift-section .section-title-netflix, ' + 
-        '.digital-gift-section p, ' + 
-        '.bank-block, ' + 
-        '.bank-note' // Stop di sini. Semua elemen footer telah dihapus dari daftar.
-    );
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                let delay = '0s'; 
-                
-                if (entry.target.closest('.mempelai-profile')) {
-                    if (entry.target.classList.contains('profile-image-container')) {
-                        delay = '0.1s';
-                    } else if (entry.target.classList.contains('profile-details')) {
-                        delay = '0.3s';
-                    }
-                } 
-                
-                else if (entry.target.closest('.photo-grid')) {
-                    const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
-                    delay = `${index * 0.15 + 0.1}s`;
-                }
-                
-                else if (entry.target.classList.contains('event-block')) {
-                    delay = '0.1s'; 
-                }
-                
-                else if (entry.target.classList.contains('bank-block')) {
-                    const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
-                    delay = `${index * 0.2 + 0.1}s`;
-                }
-                
-                entry.target.style.transitionDelay = delay;
-                entry.target.classList.add('animated');
-                observer.unobserve(entry.target);
-            }
+// =======================================
+// 2. UI & INTERACTION FUNCTIONS
+// =======================================
+
+function setupGalleryModal() {
+    const modal = document.getElementById('photoModal');
+    if (!modal) return; 
+
+    const modalImg = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalCaption = document.getElementById('modalCaption');
+    const closeBtn = document.querySelector('.close-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            modalTitle.textContent = this.getAttribute('data-title');
+            modalCaption.textContent = this.getAttribute('data-caption');
+            document.body.style.overflow = 'hidden'; 
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px' 
     });
 
-    animateElements.forEach(el => {
-        // Hapus kelas animated di awal agar tidak langsung muncul
-        el.classList.remove('animated'); 
-        observer.observe(el);
-    });
+    if(closeBtn) {
+        closeBtn.onclick = () => {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto';
+        };
+    }
+
+    window.onclick = (event) => {
+        if (event.target === modal) {
+            modal.style.display = "none";
+            document.body.style.overflow = 'auto';
+        }
+    };
 }
 
+function startFooterSlideshow() {
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.footer-slide-img');
+    if (slides.length === 0) return;
 
-// =======================================
-// INITIALIZATION (PANGGILAN UTAMA)
-// =======================================
+    function showSlides() {
+        slides.forEach(slide => slide.classList.remove('active-slide'));
+        slideIndex++;
+        if (slideIndex > slides.length) slideIndex = 1;
+        slides[slideIndex - 1].classList.add('active-slide');
+        setTimeout(showSlides, 3000);
+    }
+    showSlides();
+}
 
-document.addEventListener('DOMContentLoaded', function() {
-    const openBtn = document.getElementById('open-btn');
-    const coverPage = document.getElementById('cover');
-    const mainInvitation = document.getElementById('invitation');
-    const music = document.getElementById('background-music');
-    const musicToggle = document.getElementById('music-toggle');
-    let isMuted = false;
-    
-    // Panggil fungsi-fungsi inisiasi
-    setGuestNameFromURL(); 
-    setupGalleryModal(); // Pastikan ini dipanggil agar foto bisa diklik
-    startFooterSlideshow(); 
-
-    
-    // 1. Cover dan Musik
-    openBtn.addEventListener('click', function() {
-       
-        try {
-            music.play().catch(error => { 
-                console.error("Autoplay diblokir:", error);
-                musicToggle.style.display = 'flex';
-            });
-        } catch (error) {
-            console.error("Gagal memanggil music.play()", error);
-        }
-
-        musicToggle.style.display = 'flex';
-        
-        coverPage.style.transform = 'translateY(-100vh)';
-        
-        // 🔥 TIDAK ADA document.body.style.overflow = 'auto' di sini. 
-        // Scrolling diatur oleh CSS di file style.css
-        
-        setTimeout(() => {
-            mainInvitation.style.opacity = '1';
-            mainInvitation.style.transform = 'translateY(0)';
-            
-            initScrollAnimation(); // Panggil animasi scroll setelah cover tertutup
-        }, 100); 
-    });
-
-    
-    // 2. Mute
-    musicToggle.addEventListener('click', function() {
-        if (isMuted) {
-            music.play();
-            musicToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-        } else {
-            music.pause();
-            musicToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        }
-        isMuted = !isMuted;
-    });
-
-
-    
-    // 3. Countdown
+function startCountdown() {
     const targetDate = new Date("Jan 9, 2026 13:00:00").getTime(); 
-    
+    const daysEl = document.getElementById("days");
+    if (!daysEl) return;
+
     const countdownFunction = setInterval(function() {
         const now = new Date().getTime();
         const distance = targetDate - now;
         
-        const daysEl = document.getElementById("days");
-        if (!daysEl) {
-            clearInterval(countdownFunction);
-            return;
-        }
-
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
         const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-       
         daysEl.innerHTML = days < 10 ? "0" + days : days;
         document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
         document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
@@ -655,54 +428,123 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (distance < 0) {
             clearInterval(countdownFunction);
-            document.getElementById("countdown-timer").innerHTML = "<p style='color: #e50914;'>ACARA TELAH USAI. SELAMAT MENIKAH!</p>";
+            document.getElementById("countdown-timer").innerHTML = "<p style='color: #e50914;'>ACARA TELAH USAI!</p>";
         }
     }, 1000);
-    
-    
-   
-  
-    // 4. Kalender Link
-    const calendarLink = document.getElementById('calendar-resepsi');
-    if (calendarLink) {
-         const resepsiLink = generateGoogleCalendarLink(
-            "Resepsi & Ramah Tamah Kadek & Regitha",
-            "Gedung Serbaguna, Jalan Raya Mawar No. 10, Kota Denpasar",
-            "2026-01-9", 
-            "18:00:00", // Waktu Kalender disarankan menggunakan waktu resepsi saja (18:00-21:00)
-            "21:00:00"
-        );
-        calendarLink.setAttribute('href', resepsiLink);
-        calendarLink.setAttribute('target', '_blank');
-    }
+}
 
-  
-    // 5. Copy Rekening
+function initScrollAnimation() {
+    const animateElements = document.querySelectorAll(
+        '.short-opening-section h2, .short-opening-section p, .short-opening-section .line-separator-red, ' +
+        '.netflix-cast-section .section-title-netflix, .mempelai-profile .profile-image-container, ' + 
+        '.mempelai-profile .profile-details, .timeline-separator, .closing-narasi, ' +
+        '.prewedding-section .section-title-netflix, .prewedding-section p:not(.sloka-source), ' + 
+        '.photo-grid img, .video-container, .event-details-section .section-title-netflix, ' +
+        '.countdown-container, .event-info-grid .event-block, .digital-gift-section .section-title-netflix, ' + 
+        '.digital-gift-section p, .bank-block, .bank-note'
+    );
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let delay = '0.1s'; 
+                if (entry.target.classList.contains('bank-block') || entry.target.tagName === 'IMG') {
+                    const index = Array.from(entry.target.parentNode.children).indexOf(entry.target);
+                    delay = `${index * 0.15}s`;
+                }
+                entry.target.style.transitionDelay = delay;
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    animateElements.forEach(el => {
+        el.classList.remove('animated'); 
+        observer.observe(el);
+    });
+}
+
+function setupCopyAccount() {
     const copyButtons = document.querySelectorAll('.copy-btn');
     copyButtons.forEach(button => {
         button.addEventListener('click', function() {
-            
             const accountNumber = this.getAttribute('data-account');
-            
-            navigator.clipboard.writeText(accountNumber)
-                .then(() => {
-                    const originalText = this.innerHTML;
-                    
-                    this.innerHTML = '<i class="fas fa-check"></i> Disalin!';
-                    this.style.backgroundColor = '#4CAF50'; 
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        // Kembalikan ke warna CSS default:
-                        this.style.backgroundColor = ''; 
-                    }, 1500);
-                })
-                .catch(err => {
-                    console.error('Gagal menyalin: ', err);
-                    alert('Gagal menyalin, silakan salin manual: ' + accountNumber);
-                });
+            navigator.clipboard.writeText(accountNumber).then(() => {
+                const originalText = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i> Disalin!';
+                this.style.backgroundColor = '#4CAF50'; 
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.style.backgroundColor = ''; 
+                }, 1500);
+            });
         });
     });
+}
+
+// =======================================
+// 3. MAIN INITIALIZATION
+// =======================================
+document.addEventListener('DOMContentLoaded', function() {
+    const openBtn = document.getElementById('open-btn');
+    const coverPage = document.getElementById('cover');
+    const mainInvitation = document.getElementById('invitation');
+    const music = document.getElementById('background-music');
+    const musicToggle = document.getElementById('music-toggle');
+    let isMuted = false;
+
+    if (openBtn) {
+        openBtn.addEventListener('click', function() {
+            if(music) music.play().catch(e => console.log("Autoplay blocked"));
+            
+            // Play YouTube videos if present
+            const trailerVideos = [document.getElementById('video-trailer'), document.getElementById('trailer-video')];
+            trailerVideos.forEach(vid => {
+                if (vid) vid.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            });
+
+            if(musicToggle) musicToggle.style.display = 'flex';
+            coverPage.style.transform = 'translateY(-100vh)';
+            
+            setTimeout(() => {
+                mainInvitation.style.opacity = '1';
+                mainInvitation.style.transform = 'translateY(0)';
+                initScrollAnimation();
+            }, 100); 
+        });
+    }
+
+    if (musicToggle) {
+        musicToggle.addEventListener('click', function() {
+            if (isMuted) {
+                music.play();
+                this.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else {
+                music.pause();
+                this.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+            isMuted = !isMuted;
+        });
+    }
+
+    // Set Calendar Link
+    const calendarLink = document.getElementById('calendar-resepsi');
+    if (calendarLink) {
+        calendarLink.href = generateGoogleCalendarLink(
+            "Resepsi & Ramah Tamah Kadek & Regitha",
+            "Gedung Serbaguna, Jalan Raya Mawar No. 10, Kota Denpasar",
+            "2026-01-09", "18:00:00", "21:00:00"
+        );
+        calendarLink.target = '_blank';
+    }
+
+    // Initialize all modules
+    setGuestNameFromURL(); 
+    setupGalleryModal(); 
+    startFooterSlideshow(); 
+    startCountdown();
+    setupCopyAccount();
 });
 </script>
 </body>
